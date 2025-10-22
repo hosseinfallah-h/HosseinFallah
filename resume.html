@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رزومه - حسین فلاح</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* --- Custom Properties for Themes --- */
+        :root {
+            /* Dark Theme (Default) */
+            --bg-color: #0d1117;
+            --card-bg: rgba(22, 27, 34, 0.7);
+            --border-color: rgba(139, 148, 158, 0.3);
+            --primary-text: #c9d1d9;
+            --secondary-text: #8b949e;
+            --heading-text: #f0f6fc;
+            --accent-color: #58a6ff;
+            --accent-glow: rgba(88, 166, 255, 0.5);
+            --tag-bg: rgba(56, 139, 253, 0.15);
+            --tag-text: #58a6ff;
+            --switcher-bg: rgba(31, 41, 55, 0.5);
+            --switcher-hover-bg: rgba(55, 65, 81, 0.7);
+
+            /* Custom Colors for Navbar */
+            --primary: #58a6ff;
+            --secondary: #a2d2ff;
+            --dark: #0d1117;
+            --text-light: #c9d1d9;
+        }
+
+        html[data-theme='light'] {
+            --bg-color: #f0f9ff;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --border-color: rgba(186, 230, 253, 0.7);
+            /* sky-200 */
+            --primary-text: #334155;
+            /* slate-700 */
+            --secondary-text: #64748b;
+            /* slate-500 */
+            --heading-text: #0c4a6e;
+            /* sky-800 */
+            --accent-color: #0369a1;
+            /* sky-700 */
+            --accent-glow: rgba(2, 132, 199, 0.3);
+            /* sky-600 */
+            --tag-bg: rgba(14, 165, 233, 0.1);
+            /* sky-500 with alpha */
+            --tag-text: #0284c7;
+            /* sky-600 */
+            --switcher-bg: rgba(226, 232, 240, 0.7);
+            /* slate-200 */
+            --switcher-hover-bg: rgba(203, 213, 225, 1);
+            /* slate-300 */
+
+            /* Custom Colors for Navbar (Light) */
+            --primary: #0369a1;
+            --secondary: #0ea5e9;
+            --dark: #f0f9ff;
+            --text-light: #334155;
+        }
+
+        /* --- Liquid Glass Navigation (START) --- */
+        nav {
+            position: fixed;
+            top: 2rem;
+            right: 50%;
+            transform: translateX(50%);
+            width: 95%;
+            max-width: 1200px;
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        nav.scrolled {
+            top: 1rem;
+            width: 85%;
+            max-width: 800px;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            backdrop-filter: blur(25px) saturate(200%);
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled .logo {
+            gap: 0.8rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--dark);
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--accent-glow);
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+        }
+
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled .logo-text {
+            font-size: 1.4rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled .nav-links {
+            gap: 1.8rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        nav.scrolled .nav-links a {
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Liquid Glass Navigation (END) --- */
+
+
+        /* --- Animated Gradient Background --- */
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            direction: rtl;
+            color: var(--primary-text);
+            background: var(--bg-color);
+            transition: background-color 0.5s ease;
+            padding-top: 8rem;
+            /* Add padding for the fixed navbar */
+        }
+
+        /* --- Shooting Star Animation --- */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+            background: linear-gradient(240deg, #0d1117, #161b22, #010409);
+            background-size: 600% 600%;
+            animation: gradientAnimation 20s ease infinite;
+        }
+
+        html[data-theme='light'] .stars-container {
+            display: none;
+            /* Hide stars on light theme for better visibility */
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .star {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background: transparent;
+            box-shadow: 0 0 0 transparent;
+            animation: shooting-star-animation 10s linear infinite;
+        }
+
+        .star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) rotate(315deg);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, #fff, transparent);
+        }
+
+        @keyframes shooting-star-animation {
+            0% {
+                transform: translateX(50vw);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(-100vw);
+                opacity: 0;
+            }
+        }
+
+        .star:nth-child(1) {
+            top: 10%;
+            left: -50%;
+            animation-delay: 0s;
+            animation-duration: 5s;
+        }
+
+        .star:nth-child(2) {
+            top: 30%;
+            left: -30%;
+            animation-delay: 1.2s;
+            animation-duration: 4s;
+        }
+
+        .star:nth-child(3) {
+            top: 50%;
+            left: -70%;
+            animation-delay: 2.5s;
+            animation-duration: 6s;
+        }
+
+        .star:nth-child(4) {
+            top: 70%;
+            left: -20%;
+            animation-delay: 4.1s;
+            animation-duration: 3.5s;
+        }
+
+        .star:nth-child(5) {
+            top: 90%;
+            left: -80%;
+            animation-delay: 5.8s;
+            animation-duration: 5.5s;
+        }
+
+        /* --- Main Title Gradient --- */
+        .gradient-text {
+            background: linear-gradient(45deg, var(--accent-color), #a2d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* --- Section Title Styling --- */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            /* 24px */
+            font-weight: 700;
+            color: var(--heading-text);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title i {
+            color: var(--accent-color);
+        }
+
+        /* --- Card Styling with Glassmorphism --- */
+        .card {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 0.75rem;
+            /* 12px */
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            /* 32px */
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, background-color 0.5s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2), 0 0 15px var(--accent-glow);
+            border-color: var(--accent-glow);
+        }
+
+        /* --- Profile Picture Glow --- */
+        .profile-image {
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transition: all 0.4s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05) rotate(3deg);
+            box-shadow: 0 0 35px var(--accent-glow);
+        }
+
+        /* --- Timeline, Skills, Projects --- */
+        .timeline-item {
+            position: relative;
+            padding-right: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-right: 2px solid var(--border-color);
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+            border-right-color: transparent;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -11px;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            border: 4px solid var(--bg-color);
+            transition: transform 0.3s ease, background-color 0.5s ease;
+        }
+
+        .timeline-item:hover::before {
+            transform: scale(1.2);
+        }
+
+        .skill-tag {
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        .project-card {
+            background-color: rgba(13, 17, 23, 0.7);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        html[data-theme='light'] .project-card {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card h3 {
+            color: var(--accent-color);
+        }
+
+        /* New Link Styling */
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            background-color: var(--tag-bg);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .link-item:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(88, 166, 255, 0.1);
+            transform: translateX(-5px);
+        }
+
+
+        /* --- On-Scroll Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition-delay: 0.2s;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Print Styles --- */
+        @media print {
+            :root {
+                --bg-color: #ffffff;
+                --card-bg: #ffffff;
+                --border-color: #dee2e6;
+                --primary-text: #495057;
+                --secondary-text: #6c757d;
+                --heading-text: #212529;
+                --accent-color: #007bff;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                background: none !important;
+                animation: none !important;
+                font-size: 10pt;
+            }
+
+            .container {
+                padding: 0.5rem !important;
+                max-width: 100% !important;
+            }
+
+            .no-print,
+            nav {
+                display: none !important;
+            }
+
+            .card {
+                box-shadow: none !important;
+                border: 1px solid #e2e8f0 !important;
+                page-break-inside: avoid !important;
+                transform: none !important;
+                margin-bottom: 1rem;
+                backdrop-filter: none !important;
+            }
+
+            .gradient-text {
+                background: none !important;
+                -webkit-text-fill-color: var(--heading-text) !important;
+            }
+
+            a {
+                text-decoration: none !important;
+                color: var(--accent-color) !important;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                color: var(--heading-text) !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Liquid Glass Navigation Bar -->
+    <nav id="navbar" class="no-print">
+        <div class="logo">
+            <div class="logo-img">HF</div>
+            <span class="logo-text hidden sm:inline">حسین فلاح</span>
+        </div>
+        <div class="nav-links">
+            <a href="#hero">خانه</a>
+            <a href="#experience">سوابق</a>
+            <a href="#projects_section">پروژه‌ها</a>
+            <a href="#skills">مهارت‌ها</a>
+            <a href="#contact">تماس</a>
+        </div>
+    </nav>
+
+    <div class="stars-container no-print">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+        <!-- Header Section -->
+        <header id="hero" class="card relative flex flex-col md:flex-row items-center gap-8 mb-8 reveal">
+            <div class="absolute top-6 left-6 no-print">
+                <button id="theme-switcher" title="Toggle theme"
+                    class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300"
+                    style="background-color: var(--switcher-bg);">
+                    <i class="fas fa-sun text-lg" style="color: var(--secondary-text);"></i>
+                </button>
+            </div>
+            <div class="profile-image w-36 h-36 rounded-full flex-shrink-0 shadow-lg bg-cover bg-center"
+                style="background-image: url('https://placehold.co/144x144/0d1117/58a6ff?text=HF');"></div>
+            <div class="flex-grow text-center md:text-right">
+                <h1 class="text-4xl font-extrabold tracking-tight gradient-text">حسین فلاح</h1>
+                <h2 class="text-xl font-semibold mt-2" style="color: var(--heading-text);">توسعه دهنده Full-Stack و
+                    متخصص هوش مصنوعی</h2>
+                <h3 class="text-lg font-medium text-slate-400 mt-3 flex items-center justify-center md:justify-start">
+                    <i class="fas fa-code-branch text-slate-500 ml-2"></i>
+                    معمار راهکارهای نرم‌افزاری
+                </h3>
+                <p class="text-slate-400 mt-4 max-w-2xl text-justify leading-relaxed">
+                    توسعه‌دهنده نرم‌افزار با تمرکز بر ساخت محصولات هوشمند و مقیاس‌پذیر. علاقه‌مند به حل چالش‌های پیچیده
+                    با ترکیب مهندسی نرم‌افزار مدرن و الگوریتم‌های یادگیری ماشین.
+                </p>
+            </div>
+            <div class="flex flex-row md:flex-col gap-4 mt-4 md:mt-0 text-sm">
+                <a href="mailto:hosseinfallah294@gmail.com"
+                    class="flex items-center gap-2 hover:text-sky-400 transition-colors font-medium"
+                    style="color: var(--secondary-text);"><i class="fas fa-envelope fa-fw w-4 text-center"></i>
+                    ایمیل</a>
+                <a href="tel:+989014546422"
+                    class="flex items-center gap-2 hover:text-sky-400 transition-colors font-medium"
+                    style="color: var(--secondary-text);"><i class="fas fa-phone fa-fw w-4 text-center"></i> تلفن</a>
+                <a href="http://fallahh.com" target="_blank"
+                    class="flex items-center gap-2 hover:text-sky-400 transition-colors font-medium"
+                    style="color: var(--secondary-text);"><i class="fas fa-globe fa-fw w-4 text-center"></i> وب‌سایت</a>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Left Column (Wider) -->
+            <div class="lg:col-span-2 space-y-8">
+
+                <!-- Work Experience -->
+                <section id="experience" class="card reveal">
+                    <h2 class="section-title"><i class="fas fa-briefcase"></i> سوابق شغلی</h2>
+                    <div class="relative">
+                        <!-- NEW ENTRY -->
+                        <div class="timeline-item">
+                            <h3 class="text-lg font-bold" style="color: var(--heading-text);">مدرس هوش مصنوعی در کسب و
+                                کار
+                            </h3>
+                            <p class="text-sm font-medium" style="color: var(--secondary-text);">دانشگاه آزاد اسلامی
+                                واحد تهران جنوب</p>
+                            <p class="mt-2 text-sm leading-relaxed" style="color: var(--primary-text);">تدریس دوره‌های
+                                کاربردی هوش مصنوعی و تحلیل داده در محیط کسب و کار، با تمرکز بر انتقال مهارت‌های عملی به
+                                دانشجویان و مدیران.</p>
+                        </div>
+                        <!-- END NEW ENTRY -->
+                        <div class="timeline-item">
+                            <h3 class="text-lg font-bold" style="color: var(--heading-text);">مشاور و مدرس ارشد
+                                نرم‌افزار</h3>
+                            <p class="text-sm font-medium" style="color: var(--secondary-text);">آکادمی Aitozed</p>
+                            <p class="mt-2 text-sm leading-relaxed" style="color: var(--primary-text);">طراحی و تدریس
+                                دوره‌های پیشرفته مهندسی نرم‌افزار و هوش مصنوعی. راهبری و منتورشیپ توسعه‌دهندگان جونیور
+                                در پروژه‌های واقعی و کمک به معماری راهکارهای نرم‌افزاری مقیاس‌پذیر.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="text-lg font-bold" style="color: var(--heading-text);">مدیر پروژه - جذب و استخدام
+                                هوشمند (iSelect)</h3>
+                            <p class="text-sm font-medium" style="color: var(--secondary-text);">ایساکو</p>
+                            <p class="mt-2 text-sm" style="color: var(--primary-text);">رهبری پروژه توسعه پلتفرم هوشمند
+                                iSelect برای بهینه‌سازی فرآیندهای جذب و استخدام با استفاده از الگوریتم‌های AI.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="text-lg font-bold" style="color: var(--heading-text);">مهندس نرم‌افزار - مدیریت
+                                منابع انسانی (ماهم)</h3>
+                            <p class="text-sm font-medium" style="color: var(--secondary-text);">پروژه MAAHAM</p>
+                            <p class="mt-2 text-sm" style="color: var(--primary-text);">توسعه و پیاده‌سازی ماژول‌های
+                                اصلی در پروژه مدیریت منابع انسانی مبتنی بر هوش مصنوعی.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="text-lg font-bold" style="color: var(--heading-text);">مهندس هوش مصنوعی</h3>
+                            <p class="text-sm font-medium" style="color: var(--secondary-text);">شرکت نوآوران فناوری
+                                آینده زیبا (پروژه ایران خودرو)</p>
+                            <p class="mt-2 text-sm" style="color: var(--primary-text);">توسعه و پیاده‌سازی مدل‌های
+                                یادگیری عمیق برای پروژه عیب‌یابی صوتی خودرو.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="text-lg font-bold" style="color: var(--heading-text);">مهندس نرم افزار فرانت‌اند
+                            </h3>
+                            <p class="text-sm font-medium" style="color: var(--secondary-text);">شرکت نوآوران فناوری
+                                آینده زیبا</p>
+                            <p class="mt-2 text-sm" style="color: var(--primary-text);">توسعه رابط کاربری پروژه
+                                دانش‌بنیان "گنج درون" با استفاده از React.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="text-lg font-bold" style="color: var(--heading-text);">مدیر فنی و مدرس</h3>
+                            <p class="text-sm font-medium" style="color: var(--secondary-text);">شرکت رویاسازان جوان مهر
+                            </p>
+                            <p class="mt-2 text-sm" style="color: var(--primary-text);">مدیریت فنی و تدریس دوره‌های
+                                برنامه‌نویسی، هوش مصنوعی و حسابداری.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="text-lg font-bold" style="color: var(--heading-text);">مسئول اجرایی کانون‌های
+                                ارزیابی</h3>
+                            <p class="text-sm font-medium" style="color: var(--secondary-text);">شرکت HCtech</p>
+                            <p class="mt-2 text-sm" style="color: var(--primary-text);">برگزاری کانون‌های ارزیابی برای
+                                بانک‌های ملت، مهر ایران و دی.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- NEW Projects Links Section -->
+                <section id="projects_section" class="card reveal">
+                    <h2 class="section-title"><i class="fas fa-link"></i> پروژه‌ها و لینک‌های مرتبط</h2>
+                    <div class="space-y-4">
+                        <h4 class="font-bold border-r-4 pr-2 border-sky-500" style="color: var(--heading-text);">
+                            وبسایت‌های فعال</h4>
+                        <div class="space-y-3">
+                            <a href="https://fallahh.vercel.app/" target="_blank" class="link-item">
+                                <i class="fas fa-globe-americas w-6 text-center text-green-400"></i>
+                                <span class="font-medium mr-3" style="color: var(--primary-text);">fallahh.vercel.app/
+                                    (وبسایت شخصی و پورتفولیو)</span>
+                                <i class="fas fa-external-link-alt text-xs mr-auto"
+                                    style="color: var(--secondary-text);"></i>
+                            </a>
+                            <a href="https://tehran-jonub-ai-presentation.vercel.app/" target="_blank"
+                                class="link-item">
+                                <i class="fas fa-chalkboard-teacher w-6 text-center text-purple-400"></i>
+                                <span class="font-medium mr-3"
+                                    style="color: var(--primary-text);">tehran-jonub-ai-presentation.vercel.app/
+                                    (اسلایدهای هوش مصنوعی دانشگاه)</span>
+                                <i class="fas fa-external-link-alt text-xs mr-auto"
+                                    style="color: var(--secondary-text);"></i>
+                            </a>
+                        </div>
+
+                        <h4 class="font-bold pt-4 border-r-4 pr-2 border-sky-500" style="color: var(--heading-text);">
+                            مخازن گیت‌هاب (کدباز)</h4>
+                        <div class="space-y-3">
+                            <a href="https://github.com/hosseinfallah-h/CustomerCommentAnalysis" target="_blank"
+                                class="link-item">
+                                <i class="fab fa-github w-6 text-center text-white"></i>
+                                <span class="font-medium mr-3"
+                                    style="color: var(--primary-text);">hosseinfallah-h/CustomerCommentAnalysis (تحلیل
+                                    نظرات مشتریان)</span>
+                                <i class="fas fa-external-link-alt text-xs mr-auto"
+                                    style="color: var(--secondary-text);"></i>
+                            </a>
+                            <a href="https://github.com/hosseinfallah-h/TehranJonubAiPresentation" target="_blank"
+                                class="link-item">
+                                <i class="fab fa-github w-6 text-center text-white"></i>
+                                <span class="font-medium mr-3"
+                                    style="color: var(--primary-text);">hosseinfallah-h/TehranJonubAiPresentation (مخزن
+                                    اسلایدها)</span>
+                                <i class="fas fa-external-link-alt text-xs mr-auto"
+                                    style="color: var(--secondary-text);"></i>
+                            </a>
+                            <a href="https://github.com/hosseinfallah-h/iSelectMVP_gemma3_1b" target="_blank"
+                                class="link-item">
+                                <i class="fab fa-github w-6 text-center text-white"></i>
+                                <span class="font-medium mr-3"
+                                    style="color: var(--primary-text);">hosseinfallah-h/iSelectMVP_gemma3_1b (پروژه
+                                    LLM)</span>
+                                <i class="fas fa-external-link-alt text-xs mr-auto"
+                                    style="color: var(--secondary-text);"></i>
+                            </a>
+                            <a href="https://github.com/hosseinfallah-h/iSelectMVP_Qwen2.5-1.5b" target="_blank"
+                                class="link-item">
+                                <i class="fab fa-github w-6 text-center text-white"></i>
+                                <span class="font-medium mr-3"
+                                    style="color: var(--primary-text);">hosseinfallah-h/iSelectMVP_Qwen2.5-1.5b (پروژه
+                                    LLM دیگر)</span>
+                                <i class="fas fa-external-link-alt text-xs mr-auto"
+                                    style="color: var(--secondary-text);"></i>
+                            </a>
+                            <a href="https://github.com/hosseinfallah-h/idea-sandbox-app" target="_blank"
+                                class="link-item">
+                                <i class="fab fa-github w-6 text-center text-white"></i>
+                                <span class="font-medium mr-3"
+                                    style="color: var(--primary-text);">hosseinfallah-h/idea-sandbox-app</span>
+                                <i class="fas fa-external-link-alt text-xs mr-auto"
+                                    style="color: var(--secondary-text);"></i>
+                            </a>
+                            <a href="https://github.com/hosseinfallah-h/jdEsfahan" target="_blank" class="link-item">
+                                <i class="fab fa-github w-6 text-center text-white"></i>
+                                <span class="font-medium mr-3"
+                                    style="color: var(--primary-text);">hosseinfallah-h/jdEsfahan</span>
+                                <i class="fas fa-external-link-alt text-xs mr-auto"
+                                    style="color: var(--secondary-text);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <!-- END NEW Projects Links Section -->
+
+                <!-- Removed the old simple Projects section as the new one covers it better. -->
+            </div>
+
+            <!-- Right Column (Narrower) -->
+            <div class="lg:col-span-1 space-y-8">
+
+                <!-- Skills -->
+                <section id="skills" class="card reveal">
+                    <h2 class="section-title"><i class="fas fa-cogs"></i> حوزه‌های تخصصی</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold mb-3" style="color: var(--heading-text);">توسعه نرم‌افزار</h4>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="skill-tag px-3 py-1 rounded-full">Next.js</span><span
+                                    class="skill-tag px-3 py-1 rounded-full">React.js</span><span
+                                    class="skill-tag px-3 py-1 rounded-full">Node.js</span><span
+                                    class="skill-tag px-3 py-1 rounded-full">Express.js</span><span
+                                    class="skill-tag px-3 py-1 rounded-full">Prisma</span><span
+                                    class="skill-tag px-3 py-1 rounded-full">MongoDB</span><span
+                                    class="skill-tag px-3 py-1 rounded-full">SQL</span><span
+                                    class="skill-tag px-3 py-1 rounded-full">Python</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-3" style="color: var(--heading-text);">هوش مصنوعی و امنیت</h4>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="skill-tag px-3 py-1 rounded-full">Machine Learning</span><span
+                                    class="skill-tag px-3 py-1 rounded-full">Cybersecurity</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-3" style="color: var(--heading-text);">زبان‌های خارجی</h4>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="skill-tag px-3 py-1 rounded-full">انگلیسی</span><span
+                                    class="skill-tag px-3 py-1 rounded-full">فرانسوی (مبتدی)</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Education & Certifications -->
+                <section class="card reveal">
+                    <h2 class="section-title"><i class="fas fa-graduation-cap"></i> گواهینامه‌ها و دوره‌ها</h2>
+                    <div class="space-y-4 text-sm">
+                        <div class="border-r-2 pr-3 hover:border-sky-400 transition-colors"
+                            style="border-color: var(--border-color);">
+                            <h3 class="font-bold" style="color: var(--heading-text);">CS50's Introduction to AI with
+                                Python</h3>
+                            <p class="text-xs" style="color: var(--secondary-text);">Harvard University</p>
+                        </div>
+                        <div class="border-r-2 pr-3 hover:border-sky-400 transition-colors"
+                            style="border-color: var(--border-color);">
+                            <h3 class="font-bold" style="color: var(--heading-text);">CS50x: Introduction to Computer
+                                Science</h3>
+                            <p class="text-xs" style="color: var(--secondary-text);">Harvard University</p>
+                        </div>
+                        <div class="border-r-2 pr-3 hover:border-sky-400 transition-colors"
+                            style="border-color: var(--border-color);">
+                            <h3 class="font-bold" style="color: var(--heading-text);">CS50P: Programming with Python
+                            </h3>
+                            <p class="text-xs" style="color: var(--secondary-text);">Harvard University</p>
+                        </div>
+                        <div class="border-r-2 pr-3 hover:border-sky-400 transition-colors"
+                            style="border-color: var(--border-color);">
+                            <h3 class="font-bold" style="color: var(--heading-text);">CS50CY: Introduction to
+                                Cybersecurity</h3>
+                            <p class="text-xs" style="color: var(--secondary-text);">Harvard University</p>
+                        </div>
+                        <div class="border-r-2 pr-3 hover:border-sky-400 transition-colors"
+                            style="border-color: var(--border-color);">
+                            <h3 class="font-bold" style="color: var(--heading-text);">AI Expert</h3>
+                            <p class="text-xs" style="color: var(--secondary-text);">Sharif University of Technology</p>
+                        </div>
+                        <div class="border-r-2 pr-3 hover:border-sky-400 transition-colors"
+                            style="border-color: var(--border-color);">
+                            <h3 class="font-bold" style="color: var(--heading-text);">دوره هوش مصنوعی</h3>
+                            <p class="text-xs" style="color: var(--secondary-text);">Filager AI School</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- NEW Contact Me Section -->
+                <section id="contact" class="card reveal">
+                    <h2 class="section-title"><i class="fas fa-user-circle"></i> تماس با من</h2>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-phone-alt fa-fw w-4 text-center" style="color: var(--accent-color);"></i>
+                            <span class="font-medium" style="color: var(--heading-text);">شماره تماس:</span>
+                            <span style="color: var(--primary-text);">422 4546 0901</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="fas fa-envelope fa-fw w-4 text-center" style="color: var(--accent-color);"></i>
+                            <span class="font-medium" style="color: var(--heading-text);">ایمیل:</span>
+                            <a href="mailto:hosseinfallah294@gmail.com"
+                                class="hover:text-sky-400 transition-colors">hosseinfallah294@gmail.com</a>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="fab fa-telegram-plane fa-fw w-4 text-center"
+                                style="color: var(--accent-color);"></i>
+                            <span class="font-medium" style="color: var(--heading-text);">تلگرام:</span>
+                            <a href="https://t.me/hosseinfallah_h" target="_blank"
+                                class="hover:text-sky-400 transition-colors">hosseinfallah_h@</a>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="fab fa-github fa-fw w-4 text-center text-white"
+                                style="color: var(--accent-color);"></i>
+                            <span class="font-medium" style="color: var(--heading-text);">گیت‌هاب:</span>
+                            <a href="https://github.com/hosseinfallah-h" target="_blank"
+                                class="hover:text-sky-400 transition-colors">hosseinfallah-h</a>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="fab fa-instagram fa-fw w-4 text-center text-pink-400"
+                                style="color: var(--accent-color);"></i>
+                            <span class="font-medium" style="color: var(--heading-text);">اینستاگرام:</span>
+                            <a href="https://instagram.com/hosseinfallah_h" target="_blank"
+                                class="hover:text-sky-400 transition-colors">hosseinfallah_h@</a>
+                        </div>
+                    </div>
+                </section>
+                <!-- END Contact Me Section -->
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for On-Scroll Animations
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(elem => revealObserver.observe(elem));
+
+        // JavaScript for Theme Switcher
+        const themeSwitcher = document.getElementById('theme-switcher');
+        const themeIcon = themeSwitcher.querySelector('i');
+        const htmlEl = document.documentElement;
+
+        function setTheme(theme) {
+            htmlEl.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (theme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Set initial theme based on saved preference or system setting
+        setTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+
+        themeSwitcher.addEventListener('click', () => {
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
+        // JavaScript for Liquid Glass Navigation Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>
